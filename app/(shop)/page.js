@@ -349,7 +349,7 @@
 // }
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { useProductStore } from '@/lib/store';
 import FeaturedProducts from '@/components/shared/FeaturedProducts';
@@ -359,27 +359,26 @@ import HeroSlider from '@/components/shared/heroSection';
 import SectionLast from '@/components/shared/sectionlast';
 import SectionMid from '@/components/shared/sectionmid';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useRef } from 'react';
 import Typed from 'typed.js';
 
 const heroSlides = [
   {
     id: 1,
-    image: '/homeimage1.png',
+    image: '/coverpic.jpg',
     title: 'Elevate Interiors',
     subtitle: 'with Quality & Style',
     description: 'Since 2015, Golden Rugs has been a trusted wholesale supplier of premium rugs and curated furniture, including dining sets, coffee tables, mirrors, and more. We deliver quality, affordability, and timeless design for retailers.',
   },
   {
     id: 2,
-    image: '/homeimage2.png',
+    image: '/coverpic2.jpg',
     title: 'Transform Your Home',
     subtitle: 'with Modern Elegance',
     description: 'Discover handcrafted furniture and décor that define comfort and luxury. Shop dining sets, coffee tables, and more for your perfect space.',
   },
   {
     id: 3,
-    image: '/homeimage3.png',
+    image: '/coverpic3.jpg',
     title: 'Crafted to Inspire',
     subtitle: 'Every Space',
     description: 'Explore our wide range of designs, from bold modern styles to timeless classics — made for retailers who value excellence.',
@@ -389,47 +388,65 @@ const heroSlides = [
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const fetchProducts = useProductStore((state) => state.fetchProducts);
-const titleRef = useRef(null);
-const subtitleRef = useRef(null);
-
-useEffect(() => {
-  if (!titleRef.current || !subtitleRef.current) return;
-
-  // Destroy previous instances on slide change
-  let titleTyped, subtitleTyped;
-
-  titleTyped = new Typed(titleRef.current, {
-    strings: [heroSlides[currentSlide].title],
-    typeSpeed: 100,
-    showCursor: true,
-    cursorChar: '|',
-    backSpeed: 50,
-    loop: false,
-  });
-
-  subtitleTyped = new Typed(subtitleRef.current, {
-    strings: [heroSlides[currentSlide].subtitle],
-    typeSpeed: 80,
-    showCursor: true,
-    cursorChar: '|',
-    backSpeed: 50,
-    loop: false,
-  });
-
-  return () => {
-    titleTyped.destroy();
-    subtitleTyped.destroy();
-  };
-}, [currentSlide]);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const typedTitleInstance = useRef(null);
+  const typedSubtitleInstance = useRef(null);
 
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
+  // Typing animation effect
+  useEffect(() => {
+    if (!titleRef.current || !subtitleRef.current) return;
+
+    // Destroy previous instances
+    if (typedTitleInstance.current) {
+      typedTitleInstance.current.destroy();
+    }
+    if (typedSubtitleInstance.current) {
+      typedSubtitleInstance.current.destroy();
+    }
+
+    // Clear the content
+    titleRef.current.textContent = '';
+    subtitleRef.current.textContent = '';
+
+    // Create new typed instances
+    typedTitleInstance.current = new Typed(titleRef.current, {
+      strings: [heroSlides[currentSlide].title],
+      typeSpeed: 80,
+      showCursor: false,
+      loop: false,
+      onComplete: () => {
+        // Start subtitle typing after title is complete
+        if (subtitleRef.current) {
+          typedSubtitleInstance.current = new Typed(subtitleRef.current, {
+            strings: [heroSlides[currentSlide].subtitle],
+            typeSpeed: 70,
+            showCursor: false,
+            loop: false,
+          });
+        }
+      }
+    });
+
+    return () => {
+      if (typedTitleInstance.current) {
+        typedTitleInstance.current.destroy();
+      }
+      if (typedSubtitleInstance.current) {
+        typedSubtitleInstance.current.destroy();
+      }
+    };
+  }, [currentSlide]);
+
+  // Auto slide
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 6000);
+    }, 8000); // Increased to 8 seconds to allow typing to complete
     return () => clearInterval(timer);
   }, []);
 
@@ -468,17 +485,16 @@ useEffect(() => {
                   <div className="relative h-full flex items-center">
                     <div className="container mx-auto px-4 md:px-8 lg:px-16">
                       <div className="max-w-3xl">
-                       <motion.h1
-  initial={{ opacity: 0, y: 30 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.3, duration: 0.8 }}
-  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4"
->
-  <span ref={titleRef}></span>
-  <br />
-  <span className="text-yellow-400" ref={subtitleRef}></span>
-</motion.h1>
-
+                        <motion.h1
+                          initial={{ opacity: 0, y: 30 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.3, duration: 0.8 }}
+                          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4"
+                        >
+                          <span ref={titleRef} className="inline-block min-h-[1.2em]"></span>
+                          <br />
+                          <span ref={subtitleRef} className="text-yellow-400 inline-block min-h-[1.2em]"></span>
+                        </motion.h1>
 
                         <motion.p
                           initial={{ opacity: 0, y: 30 }}

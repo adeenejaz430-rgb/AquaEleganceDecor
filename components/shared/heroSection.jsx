@@ -12,7 +12,7 @@ export default function HeroSection() {
           {/* Left Content */}
           <div className="w-full lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0 z-10">
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 leading-tight">
-              Fresh Exotic Fruits
+             Mobile Acessories Collection
             </h1>
             <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-700 mb-6 leading-tight">
               in Our Store
@@ -46,7 +46,7 @@ export default function HeroSection() {
                 {/* You can replace this with your actual fruit crate image */}
                 <div className="relative w-full h-[400px] lg:h-[500px] rounded-b-3xl">
                   <Image
-                    src="/blendedimage.png"
+                    src="/product.jpg"
                     alt="Fresh Exotic Fruits"
                     fill
                     className="object-contain drop-shadow-2xl rounded-2xl"

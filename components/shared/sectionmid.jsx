@@ -6,8 +6,8 @@ import Image from 'next/image';
 const promoCards = [
   {
     id: 1,
-    image: '/homeimage1.png', // Replace with your fountain image
-    title: 'Beautiful Fountains',
+    image: '/product.jpg', // Replace with your fountain image
+    title: 'Collection',
     discount: '20% OFF',
     bgColor: 'bg-yellow-400',
     labelBg: 'bg-green-500',
@@ -16,8 +16,8 @@ const promoCards = [
   },
   {
     id: 2,
-    image: '/homeimage2.png', // Replace with your artificial flowers image
-    title: 'Artificial Flowers',
+    image: '/earbuds.jpg', // Replace with your artificial flowers image
+    title: 'Earbuds',
     discount: 'Free delivery',
     bgColor: 'bg-gray-600',
     labelBg: 'bg-white',
@@ -26,8 +26,8 @@ const promoCards = [
   },
   {
     id: 3,
-    image: '/homeimage2.png', // Replace with your plants & vases image
-    title: 'Plants & Vases',
+    image: '/headphones.jpg', // Replace with your plants & vases image
+    title: 'Headphones',
     discount: 'Discount 30$',
     bgColor: 'bg-green-500',
     labelBg: 'bg-yellow-400',

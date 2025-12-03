@@ -21,8 +21,8 @@ export default function Footer() {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             {/* Logo and Tagline */}
             <div>
-              <h2 className="text-green-500 text-4xl font-bold mb-2">Fruitables</h2>
-              <p className="text-orange-400 text-lg">Fresh products</p>
+              <h2 className="text-green-500 text-4xl font-bold mb-2">Mobile Acessories</h2>
+              <p className="text-orange-400 text-lg">Affordable Prices</p>
             </div>
 
             {/* Newsletter Form */}
