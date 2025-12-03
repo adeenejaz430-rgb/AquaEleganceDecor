@@ -1,6 +1,6 @@
 'use client';
 
-import ThemeProvider from "@/components/providers/ThemeProvider";
+// import ThemeProvider from "@/components/providers/ThemeProvider";
 import { useRouter } from 'next/navigation';
 import { useSession } from "next-auth/react";
 import { useEffect } from 'react';
@@ -18,11 +18,11 @@ export default function AuthLayout({ children }) {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <ThemeProvider>
+      {/* <ThemeProvider> */}
         <main className="flex-grow">
           {children}
         </main>
-      </ThemeProvider>
+      {/* </ThemeProvider> */}
     </div>
   );
 }
