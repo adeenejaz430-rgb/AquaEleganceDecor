@@ -364,21 +364,21 @@ import Typed from 'typed.js';
 const heroSlides = [
   {
     id: 1,
-    image: '/coverpic.jpg',
+    image: '/af4.jpg',
     title: 'Elevate Interiors',
     subtitle: 'with Quality & Style',
     description: 'Since 2015, Golden Rugs has been a trusted wholesale supplier of premium rugs and curated furniture, including dining sets, coffee tables, mirrors, and more. We deliver quality, affordability, and timeless design for retailers.',
   },
   {
     id: 2,
-    image: '/coverpic2.jpg',
+    image: '/fountain.jpg',
     title: 'Transform Your Home',
     subtitle: 'with Modern Elegance',
     description: 'Discover handcrafted furniture and décor that define comfort and luxury. Shop dining sets, coffee tables, and more for your perfect space.',
   },
   {
     id: 3,
-    image: '/coverpic3.jpg',
+    image: '/af3.jpg',
     title: 'Crafted to Inspire',
     subtitle: 'Every Space',
     description: 'Explore our wide range of designs, from bold modern styles to timeless classics — made for retailers who value excellence.',
